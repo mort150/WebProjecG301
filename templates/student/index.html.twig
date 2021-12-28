@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <table>
+    <thead>
+        <th>Student Name</th>
+        <th>Student Code</th>
+        <th>Gender</th>
+        <th>Active</th>
+    </thead>
+    {% for student in students %}
+    <tr>
+        <td>{{student.name}}</td>
+        <td>{{student.code}}</td>
+        <td>{{student.gender}}</td>
+        <td>
+            <a href="">Edit</a>
+            <a href="">Delete</a>
+            <a href="">Detail</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+    </table>
+{% endblock %}
