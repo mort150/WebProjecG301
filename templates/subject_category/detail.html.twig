@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SubjectCategoryController!{% endblock %}
+
+{% block body %}
+<div class="container-md col-md-6 text-center">
+    <h3>{{category.name}}: {{category.description}}</h3>
+    
+    {# {% for subject in category.subjects %}
+        {{subject.name}}, 
+    {% endfor %} #}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Subject Code</th>
+                <th>Subject Name</th>
+                <th>Credit</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for subject in category.subjects %}
+            <tr>
+                <th>{{subject.code}}</th>
+                <th>
+                <a href="{{path ('subject_detail', {'id': subject.id})}}">
+                    {{subject.name}}
+                </a>
+                </th>
+                <th>
+                    {{subject.credit}}
+                </th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

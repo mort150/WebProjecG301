@@ -3,11 +3,13 @@
 {% block title %}Hello SubjectController!{% endblock %}
 
 {% block body %}
+<div class="container-md col-md-6 text-center">
+    <a href="{{path ('subject_add')}}" class="btn btn-primary">Add new subject</a>
 <table class="table">
     <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Subject Name</th>
             <th>Controller</th>
         </tr>
     </thead>
@@ -15,13 +17,18 @@
     {% for subject in subjects %}
         <tr>
             <th>{{subject.id}}</th>
-            <th>{{subject.name}}</th>
             <th>
-            <a href="">Edit</a>
-            <a href="">Delete</a>
+            <a href="{{path ('subject_detail', {'id': subject.id})}}">
+                {{subject.name}}
+            </a>
+            </th>
+            <th>
+            <a href="{{path ('subject_edit', {'id':subject.id})}}">Edit</a>
+            <a href="{{path ('subject_delete', {'id': subject.id})}}">Delete</a>
             </th>
         </tr>
     {% endfor %}
     </tbody>
 </table>
+</div>
 {% endblock %}
