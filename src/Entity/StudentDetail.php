@@ -42,6 +42,11 @@ class StudentDetail
      */
     private $phone;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Student::class, cascade={"persist", "remove"})
+     */
+    private $student;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class StudentDetail
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getStudent(): ?Student
+    {
+        return $this->student;
+    }
+
+    public function setStudent(?Student $student): self
+    {
+        $this->student = $student;
 
         return $this;
     }

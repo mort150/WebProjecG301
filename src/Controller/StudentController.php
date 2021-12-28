@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Student;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -46,5 +47,19 @@ class StudentController extends AbstractController
             $manager->flush();
         }
         return $this->redirectToRoute("student_index");
+    }
+
+    /**
+     * @Route("/student/add/", name="student_add")
+     */
+    public function studentAdd(Request $request){
+
+    }
+
+    /**
+     * @Route("/student/edit/{id}", name="student_edit")
+     */
+    public function studentEdit(Request $request, $id){
+        
     }
 }
