@@ -33,11 +33,11 @@ class ClassroomController extends AbstractController
      */
     public function classroomDetail($id)
     {
-        $classrooms = $this->getDoctrine()->getRepository(Classroom::class)->find($id);
+        $classroom = $this->getDoctrine()->getRepository(Classroom::class)->find($id);
         return $this->render(
-            'classroom/index.html.twig',
+            'classroom/detail.html.twig',
             [
-                'classrooms' => $classrooms
+                'classroom' => $classroom
             ]
         );
     }

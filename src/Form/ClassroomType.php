@@ -35,9 +35,9 @@ class ClassroomType extends AbstractType
                     'label' => 'Teacher will manage class',
                     'required' => true,
                     'class' => Teacher::class,
-                    'choices_label' => 'name',
+                    'choice_label' => 'name',
                     'multiple' => false,
-                    'choices' => true
+                    'expanded' => true
                 ]
             )
             ->add(
@@ -47,7 +47,7 @@ class ClassroomType extends AbstractType
                     'label' => 'Subjects will be in class',
                     'required' => true,
                     'class' => Subject::class,
-                    'choices_label' => 'name',
+                    'choice_label' => 'name',
                     'multiple' => true,
                     'expanded' => true
                 ]
