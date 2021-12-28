@@ -76,16 +76,18 @@ class Teacher
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image)
     {
-        $this->image = $image;
-
-        return $this;
+        if ($image != null) {
+            $this->image = $image;
+        } else {
+            return $this;
+        }
     }
 
     public function getGender(): ?string
