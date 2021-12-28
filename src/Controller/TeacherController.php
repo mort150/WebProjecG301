@@ -34,11 +34,11 @@ class TeacherController extends AbstractController
      */
     public function teacherDetail($id)
     {
-        $teachers = $this->getDoctrine()->getRepository(Teacher::class)->find($id);
+        $teacher = $this->getDoctrine()->getRepository(Teacher::class)->find($id);
         return $this->render(
-            'teacher/index.html.twig',
+            'teacher/detail.html.twig',
             [
-                'teachers' => $teachers
+                'teacher' => $teacher
             ]
         );
     }
@@ -65,7 +65,7 @@ class TeacherController extends AbstractController
         $form = $this->createForm(TeacherType::class, $teacher);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $image = $this->getImage();
+            $image = $teacher->getImage();
             $iname = uniqid();
             $iExtension = $image->guessExtension();
             $idonename = $iname . "." . $iExtension;
@@ -99,7 +99,7 @@ class TeacherController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form['image']->getData();
             if ($file != null) {
-                $image = $this->getImage();
+                $image = $teacher->getImage();
                 $iname = uniqid();
                 $iExtension = $image->guessExtension();
                 $idonename = $iname . "." . $iExtension;
