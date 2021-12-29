@@ -4,13 +4,21 @@
 
 {% block body %}
 <div class="container-md col-md-6 text-center">
+{% if is_granted('ROLE_ADMIN') %}
     <a href="{{path ('subject_add')}}" class="btn btn-primary">Add new subject</a>
+{% endif %}    
 <table class="table">
     <thead>
         <tr>
             <th>ID</th>
             <th>Subject Name</th>
-            <th>Controller</th>
+            <th>
+            {% if is_granted('ROLE_ADMIN') %}
+                Controller
+            {% else %}
+                Subject Code
+            {% endif %}
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -23,8 +31,12 @@
             </a>
             </th>
             <th>
-            <a href="{{path ('subject_edit', {'id':subject.id})}}">Edit</a>
-            <a href="{{path ('subject_delete', {'id': subject.id})}}">Delete</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{path ('subject_edit', {'id':subject.id})}}">Edit</a>
+                <a href="{{path ('subject_delete', {'id': subject.id})}}">Delete</a>
+            {% else %}
+                {{subject.code}}
+            {% endif %}
             </th>
         </tr>
     {% endfor %}

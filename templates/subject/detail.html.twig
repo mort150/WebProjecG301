@@ -12,7 +12,9 @@
             <th>Subject Code</th>
             <th>Credit</th>
             <th>Description</th>
-            <th>Controller</th>
+            {% if is_granted('ROLE_ADMIN') %}
+                <th>Controller</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -26,10 +28,12 @@
             <th>{{subject.code}}</th>
             <th>{{subject.credit}}</th>
             <th>{{subject.description}}</th>
+            {% if is_granted('ROLE_ADMIN') %}
             <th>
-            <a href="">Edit</a>
-            <a href="">Delete</a>
+            <a href="{{path ('subject_edit', {'id':subject.id})}}">Edit</a>
+            <a href="{{path ('subject_delete', {'id': subject.id})}}">Delete</a>
             </th>
+            {% endif %}
         </tr>
     </tbody>
 </table>
