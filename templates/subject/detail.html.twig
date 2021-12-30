@@ -3,39 +3,49 @@
 {% block title %}Hello SubjectController!{% endblock %}
 
 {% block body %}
-<div class="container-md col-md-8 text-center">
-<table class="table">
-    <thead>
-        <tr>
-            <th>Major</th>
-            <th>Subject Name</th>
-            <th>Subject Code</th>
-            <th>Credit</th>
-            <th>Description</th>
-            {% if is_granted('ROLE_ADMIN') %}
-                <th>Controller</th>
-            {% endif %}
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th>
-            <a href="{{path ('category_detail', {'id': subject.subjectcategory.id})}}">
-            {{subject.subjectcategory.name}}
-            </a>
-            </th>
-            <th>{{subject.name}}</th>
-            <th>{{subject.code}}</th>
-            <th>{{subject.credit}}</th>
-            <th>{{subject.description}}</th>
-            {% if is_granted('ROLE_ADMIN') %}
-            <th>
-            <a href="{{path ('subject_edit', {'id':subject.id})}}">Edit</a>
-            <a href="{{path ('subject_delete', {'id': subject.id})}}">Delete</a>
-            </th>
-            {% endif %}
-        </tr>
-    </tbody>
-</table>
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8"><h2><b>Subject Detail</b></h2></div>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Major</th>
+                    <th>Subject Name</th>
+                    <th>Subject Code</th>
+                    <th>Credit</th>
+                    <th>Description</th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <th>Controller</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>
+                    <a href="{{path ('category_detail', {'id': subject.subjectcategory.id})}}">
+                    {{subject.subjectcategory.name}}
+                    </a>
+                    </th>
+                    <th>{{subject.name}}</th>
+                    <th>{{subject.code}}</th>
+                    <th>{{subject.credit}}</th>
+                    <th>{{subject.description}}</th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <th>
+                        <a href="{{path ('subject_edit', {'id':subject.id})}}" class="edit" title="Edit" data-toggle="tooltip"
+                        ><i class="material-icons">&#xE254;</i></a>
+                        <a href="{{path ('subject_delete', {'id': subject.id})}}" class="delete" title="Delete" data-toggle="tooltip"
+                        onclick="return confirm('Delete this subject?');">
+                        <i class="material-icons">&#xE872;</i></a>
+                    </th>
+                    {% endif %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

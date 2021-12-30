@@ -3,40 +3,52 @@
 {% block title %}Hello SubjectCategoryController!{% endblock %}
 
 {% block body %}
-<div class="container-md col-md-6 text-center">
-{% if is_granted('ROLE_ADMIN') %}
-<a href="{{path ('category_add')}}" class="btn btn-primary">Add new major</a>
-{% endif %}
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Major</th>
-            <th>Description</th>
-            {% if is_granted('ROLE_ADMIN') %}
-            <th>Controller</th>
-            {% endif %}
-        </tr>
-    </thead>
-    <tbody>
-    {% for category in categories %}
-        <tr>
-            <th>{{category.id}}</th>
-            <th>
-            <a href="{{path ('category_detail', {'id':category.id})}}">
-                {{category.name}}
-            </a>
-            </th>
-            <th>{{category.description}}</th>
-            {% if is_granted('ROLE_ADMIN') %}
-            <th>
-            <a href="{{path ('category_edit', {'id': category.id})}}">Edit</a>
-            <a href="{{path ('category_delete', {'id': category.id})}}">Delete</a>
-            </th>
-            {% endif %}
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8"><h2><b>Major</b> List</h2></div>
+                <div class="col-sm-4">
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{path ('category_add')}}" class="btn btn-info add-new"><i class="fa fa-plus"></i>Add new major</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th width="100px">ID</th>
+                    <th width="250px">Major</th>
+                    <th>Image</th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <th>Controller</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <th>{{category.id}}</th>
+                    <th>
+                    <a href="{{path ('category_detail', {'id':category.id})}}">
+                        {{category.name}}
+                    </a>
+                    </th>
+                    <th><img src="{{asset ('covers/'~category.cover)}}" width="80" alt=""></th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <th>
+                    <a href="{{path ('category_edit', {'id': category.id})}}" class="edit" title="Edit" data-toggle="tooltip"
+                        ><i class="material-icons">&#xE254;</i></a>
+                    <a href="{{path ('category_delete', {'id': category.id})}}" class="delete" title="Delete" data-toggle="tooltip"
+                    onclick="return confirm('Delete this major?');">
+                        <i class="material-icons">&#xE872;</i></a>
+                    </th>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

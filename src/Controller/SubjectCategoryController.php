@@ -4,11 +4,15 @@ namespace App\Controller;
 
 use App\Form\CategoryType;
 use App\Entity\SubjectCategory;
+use SebastianBergmann\Environment\Console;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
+use function PHPUnit\Framework\throwException;
 
 class SubjectCategoryController extends AbstractController
 {
@@ -38,7 +42,7 @@ class SubjectCategoryController extends AbstractController
      */
     public function categoryDelete($id){
         $cate = $this->getDoctrine()->getRepository(SubjectCategory::class)->find($id);
-
+        
         $manager = $this->getDoctrine()->getManager();
         $manager->remove($cate);
         $manager->flush();
@@ -56,6 +60,21 @@ class SubjectCategoryController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            //upload image
+            $image = $cate->getCover();
+            $imgName = uniqid();
+            // $imgExtension = $image->guessExtension();
+            $imgNew = $imgName . ".png";
+
+            try{
+                $image->move(
+                    $this->getParameter('major_cover'), $imgNew
+                );
+            }catch(FileException $e){
+                throwException($e);
+            }
+            $cate->setCover($imgNew);
+            
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($cate);
             $manager->flush();
@@ -77,6 +96,25 @@ class SubjectCategoryController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            //upload image
+            $file = $form['cover']->getData();
+            if($file != null){
+                $image = $cate->getCover();
+                $imgName = uniqid();
+                // $imgExtension = $image->guessExtension();
+                $imgNew = $imgName . ".png";
+
+                try{
+                    $image->move(
+                        $this->getParameter('major_cover'), $imgNew
+                    );
+                }catch(FileException $e){
+                    throwException($e);
+                }
+                $cate->setCover($imgNew);
+            }
+            
+            
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($cate);
             $manager->flush();

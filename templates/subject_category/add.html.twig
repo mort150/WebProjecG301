@@ -3,8 +3,8 @@
 {% block title %}Hello SubjectController!{% endblock %}
 
 {% block body %}
-<div class="container-md col-md-3">
-    <h3>Add new major</h3>
+<div class="container">
+    <h3 class="text-center">Add New Major</h3>
     {{form_start (form)}}
         <div class="form-group">
             {{form_label (form.name)}}
@@ -15,6 +15,12 @@
         <div class="form-group">
             {{form_label (form.description)}}
             {{form_widget (form.description,{
+                'attr': {'class': 'form-control'}
+            })}}
+        </div>
+        <div class="form-group">
+            {{form_label (form.cover)}}
+            {{form_widget (form.cover,{
                 'attr': {'class': 'form-control'}
             })}}
         </div>

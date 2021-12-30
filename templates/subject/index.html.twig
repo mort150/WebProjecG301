@@ -1,46 +1,57 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello SubjectController!{% endblock %}
-
 {% block body %}
-<div class="container-md col-md-6 text-center">
-{% if is_granted('ROLE_ADMIN') %}
-    <a href="{{path ('subject_add')}}" class="btn btn-primary">Add new subject</a>
-{% endif %}    
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Subject Name</th>
-            <th>
-            {% if is_granted('ROLE_ADMIN') %}
-                Controller
-            {% else %}
-                Subject Code
-            {% endif %}
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for subject in subjects %}
-        <tr>
-            <th>{{subject.id}}</th>
-            <th>
-            <a href="{{path ('subject_detail', {'id': subject.id})}}">
-                {{subject.name}}
-            </a>
-            </th>
-            <th>
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{path ('subject_edit', {'id':subject.id})}}">Edit</a>
-                <a href="{{path ('subject_delete', {'id': subject.id})}}">Delete</a>
-            {% else %}
-                {{subject.code}}
-            {% endif %}
-            </th>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<div class="container">  
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8"><h2><b>Subject</b> List</h2></div>
+                <div class="col-sm-4">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{path ('subject_add')}}" class="btn btn-info add-new"><i class="fa fa-plus"></i>Add new subject</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th  width="100px">ID</th>
+                    <th  width="200px">Subject Name</th>
+                    <th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        Controller
+                    {% else %}
+                        Subject Code
+                    {% endif %}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for subject in subjects %}
+                <tr>
+                    <th>{{subject.id}}</th>
+                    <th>
+                    <a href="{{path ('subject_detail', {'id': subject.id})}}">
+                        {{subject.name}}
+                    </a>
+                    </th>
+                    <th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{path ('subject_edit', {'id':subject.id})}}" class="edit" title="Edit" data-toggle="tooltip"
+                        ><i class="material-icons">&#xE254;</i></a>
+                        <a href="{{path ('subject_delete', {'id': subject.id})}}" class="delete" title="Delete" data-toggle="tooltip"
+                        onclick="return confirm('Delete this subject?');">
+                        <i class="material-icons">&#xE872;</i></a>
+                    {% else %}
+                        {{subject.code}}
+                    {% endif %}
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
