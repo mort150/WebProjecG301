@@ -7,15 +7,18 @@
 {% block body %}
 	<center>
 		<div class="container col-10 md-8">
-			<a class="btn btn-primary" href="{{path("teacher_add")}} "><img src="{{asset('images/add.png')}}" alt="Add pic" width="50px" height="50px"></a>
+			{% if is_granted('ROLE_ADMIN') %}
+				<a class="btn btn-primary" href="{{path("teacher_add")}} "><img src="{{asset('images/add.png')}}" alt="Add pic" width="50px" height="50px"></a>
+
+			{% endif %}
 			<hr>
-			<div class="container col-5 form-group">
+			<div class="container col-4 form-group">
 				<form action="{{path('teacher_name_search')}} " method="post">
 					<input class="form-control" type="search" name="name" placeholder="Search by Name of Teacher" required>
 				</form>
 			</div>
 			<br>
-			<div>
+			<div class="container col-8">
 				<table class="table table-striped text-center">
 					<thead class="thead-dark">
 						<tr class="table-info">
@@ -26,7 +29,10 @@
 							<th>Phone</th>
 							<th>Email</th>
 							<th>Class(es)</th>
-							<th>Actions</th>
+							{% if is_granted('ROLE_ADMIN') %}
+								<th>Actions</th>
+							{% endif %}
+
 						</tr>
 					</thead>
 					<tbody>
@@ -43,9 +49,12 @@
 									</a>
 								{% endfor %}
 							</td>
-							<td>
-								<a class="btn btn-primary" href="{{path("teacher_edit",{'id': teacher.id})}}">Edit</a>
-							</td>
+							{% if is_granted('ROLE_ADMIN') %}
+								<td>
+									<a class="btn btn-primary" href="{{path("teacher_edit",{'id': teacher.id})}}">Edit</a>
+								</td>
+							{% endif %}
+
 						</tr>
 					</tbody>
 				</table>

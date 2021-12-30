@@ -31,6 +31,15 @@
       }}
 			</div>
 
+			<div class="form-group">
+				{{ form_label (form.students) }}
+				{{ form_widget (form.students,
+         {
+            'attr' : {'class' : 'form-control'}
+         })
+      }}
+			</div>
+
 			<div class="form-group text-center mt-3">
 				<input class="btn btn-success" type="submit" value="Add">
 			</div>
