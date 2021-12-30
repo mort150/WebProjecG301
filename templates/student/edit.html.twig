@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-md col-md-3">
+    <h3>Edit student</h3>
+    {{form_start (form)}}
+        <div class="form-group">
+            {{form_label (form.name)}}
+            {{form_widget (form.name,{
+                'attr': {'class': 'form-control'}
+            })}}
+        </div>
+        <div class="form-group">
+            {{form_label (form.code)}}
+            {{form_widget (form.code,{
+                'attr': {'class': 'form-control'}
+            })}}
+        </div>
+        <div class="form-group">
+            {{form_label (form.gender)}}
+            {{form_widget (form.gender,{
+                'attr': {'class': 'form-control'}
+            })}}
+        </div>
+        <div class="form-group">
+            {{form_label (form.image)}}
+            {{form_widget (form.image,{
+                'attr': {'class': 'form-control'}
+            })}}
+        </div>
+        <div class="form-group">
+            {{form_label (form.detail)}}
+            {{form_widget (form.detail,{
+                'attr': {'class': 'form-control'}
+            })}}
+        </div>
+        <div class="form-group text-center">
+            <a href="{{ path ('student_index')}}"><input type="submit" value="Edit" class="btn btn-primary"></a>
+        </div>
+    {{form_end (form)}}
+</div>
+{% endblock %}
