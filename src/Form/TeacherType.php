@@ -71,8 +71,8 @@ class TeacherType extends AbstractType
                     'label' => 'Teacher Number',
                     'required' => true,
                     'attr' => [
-                        'min' => 10,
-                        'max' => 10
+                        'minlength' => 10,
+                        'maxlength' => 10
                     ]
                 ]
             );
