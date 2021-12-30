@@ -5,13 +5,14 @@ namespace App\Controller;
 use App\Entity\Teacher;
 use App\Form\TeacherType;
 use App\Repository\TeacherRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
+use function PHPUnit\Framework\throwException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-use function PHPUnit\Framework\throwException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class TeacherController extends AbstractController
 {
@@ -44,6 +45,7 @@ class TeacherController extends AbstractController
     }
 
     /**
+     *  @IsGranted("ROLE_ADMIN")
      * @Route("/teacher/delete/{id}", name="teacher_delete")
      */
     public function teacherDelete($id)
@@ -56,6 +58,7 @@ class TeacherController extends AbstractController
     }
 
     /**
+     *  @IsGranted("ROLE_ADMIN")
      * @Route("/teacher/add", name="teacher_add")
      */
     public function teacherAdd(Request $request)
@@ -89,6 +92,7 @@ class TeacherController extends AbstractController
     }
 
     /**
+     *  @IsGranted("ROLE_ADMIN")
      * @Route("/teacher/edit/{id}", name="teacher_edit")
      */
     public function teacherEdit(Request $request, $id)
