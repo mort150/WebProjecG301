@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Classroom;
+use App\Entity\Student;
 use App\Entity\Subject;
 use App\Entity\Teacher;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -47,6 +48,18 @@ class ClassroomType extends AbstractType
                     'label' => 'Subjects will be in class',
                     'required' => true,
                     'class' => Subject::class,
+                    'choice_label' => 'name',
+                    'multiple' => true,
+                    'expanded' => true
+                ]
+            )
+            ->add(
+                'students',
+                EntityType::class,
+                [
+                    'label' => 'Subjects will be in class',
+                    'required' => true,
+                    'class' => Student::class,
                     'choice_label' => 'name',
                     'multiple' => true,
                     'expanded' => true
