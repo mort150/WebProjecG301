@@ -34,6 +34,11 @@ class SubjectCategory
      */
     private $subjects;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cover;
+
     public function __construct()
     {
         $this->subjects = new ArrayCollection();
@@ -93,6 +98,20 @@ class SubjectCategory
             if ($subject->getSubjectcategory() === $this) {
                 $subject->setSubjectcategory(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getCover()
+    {
+        return $this->cover;
+    }
+
+    public function setCover( $cover)
+    {
+        if($cover != null){
+            $this->cover = $cover;
         }
 
         return $this;
