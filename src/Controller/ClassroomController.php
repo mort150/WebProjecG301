@@ -98,16 +98,16 @@ class ClassroomController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/classroom/search", name="classroom_name_search")
-     */
-    public function classroomSearch(ClassroomRepository $repository, Request $request)
-    {
-        $name = $request->get("name");
-        $classrooms = $repository->searchclassroom($name);
-        return $this->render("classroom/index.html.twig",[
-            'classrooms' => $classrooms
-        ]);
-    }
+    // /**
+    //  * @Route("/classroom/search", name="classroom_name_search")
+    //  */
+    // public function classroomSearch(ClassroomRepository $repository, Request $request)
+    // {
+    //     $name = $request->get("name");
+    //     $classrooms = $repository->searchclassroom($name);
+    //     return $this->render("classroom/index.html.twig",[
+    //         'classrooms' => $classrooms
+    //     ]);
+    // }
     
 }
