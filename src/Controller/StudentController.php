@@ -74,6 +74,7 @@ class StudentController extends AbstractController
                 }catch(FileException $e){
                     throwException($e);
                 }
+            $student->setImage($imageName);
             $manager = $this->getDoctrine()->getManager();
             $manager ->persist($student);
             $manager->flush();
@@ -107,8 +108,8 @@ class StudentController extends AbstractController
                 }catch(FileException $e){
                     throwException($e);
                 }
+                $student->setImage($imageName);
             }
-            $student->setImage($imageName);
             $manager = $this->getDoctrine()->getManager();
             $manager ->persist($student);
             $manager->flush();

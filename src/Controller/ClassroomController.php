@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Type;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
@@ -43,6 +44,7 @@ class ClassroomController extends AbstractController
     }
 
     /**
+     *  @IsGranted("ROLE_ADMIN")
      * @Route("/classroom/delete/{id}", name="classroom_delete")
      */
     public function classroomDelete($id)
@@ -55,6 +57,7 @@ class ClassroomController extends AbstractController
     }
 
     /**
+     *  @IsGranted("ROLE_ADMIN")
      * @Route("/classroom/add", name="classroom_add")
      */
     public function classroomAdd(Request $request)
@@ -75,6 +78,7 @@ class ClassroomController extends AbstractController
     }
 
     /**
+     *  @IsGranted("ROLE_ADMIN")
      * @Route("/classroom/edit/{id}", name="classroom_edit")
      */
     public function classroomEdit(Request $request, $id)
@@ -94,16 +98,16 @@ class ClassroomController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/classroom/search", name="classroom_name_search")
-     */
-    public function classroomSearch(ClassroomRepository $repository, Request $request)
-    {
-        $name = $request->get("name");
-        $classrooms = $repository->searchclassroom($name);
-        return $this->render("classroom/index.html.twig",[
-            'classrooms' => $classrooms
-        ]);
-    }
+    // /**
+    //  * @Route("/classroom/search", name="classroom_name_search")
+    //  */
+    // public function classroomSearch(ClassroomRepository $repository, Request $request)
+    // {
+    //     $name = $request->get("name");
+    //     $classrooms = $repository->searchclassroom($name);
+    //     return $this->render("classroom/index.html.twig",[
+    //         'classrooms' => $classrooms
+    //     ]);
+    // }
     
 }

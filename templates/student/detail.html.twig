@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{path ('student_add')}}"><img src="{{asset('images/add.jpeg')}}" width=70 height=60></a>
+    {% endif %} 
+    <table class="table hover-table">
+    <thead class="table-warning">
+        <th>Student Name</th>
+        <th>Address</th>
+        <th>Birthday</th>
+        <th>Email</th>
+        <th>Phone</th>
+        {% if is_granted('ROLE_ADMIN') %}
+        <th>Active</th>
+        {% endif %}
+    </thead>
+    <tr>
+        <td>{{student.name}}</td>
+        <td>{{student.detail.address}}</td>
+        <td>{{ student.detail.birthday | date ('d/m/Y') }}</td>
+        <td>{{student.detail.email}}</td>
+        <td>{{student.detail.phone}}</td>
+        {% if is_granted('ROLE_ADMIN') %}
+            <td>
+                <a href="{{ path ('student_edit', {'id': student.id})}}">
+                <img src="{{asset('images/edit.jpeg')}}" width=35 height=30></a>
+                <a href="{{ path ('student_delete', {'id': student.id})}}">
+                <img src="{{asset('images/delete.jpeg')}}" width=35 height=40></a>
+            </td>
+        {% endif %} 
+    </tr>
+    </table>
+{% endblock %}

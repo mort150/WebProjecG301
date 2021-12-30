@@ -1,24 +1,35 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <table>
-    <thead>
-        <th>Student Name</th>
-        <th>Student Code</th>
-        <th>Gender</th>
-        <th>Active</th>
-    </thead>
+    {% if is_granted('ROLE_ADMIN') %}
+        <center><a href="{{path ('student_add')}}"><img src="{{asset('images/add.jpeg')}}" width=70 height=60></a></center>
+    {% endif %}
+    <br> 
+    {# <div class="col">
+    <div class="col-3"> #}
+    <div class="container mt-20" style="display: grid;  grid-template-columns: 25% 25% 25% 25%"> 
     {% for student in students %}
-    <tr>
-        <td>{{student.name}}</td>
-        <td>{{student.code}}</td>
-        <td>{{student.gender}}</td>
-        <td>
-            <a href="">Edit</a>
-            <a href="">Delete</a>
-            <a href="">Detail</a>
-        </td>
-    </tr>
+        <div class="card" style="width: 15rem;">
+            <td>
+                <a class="card-img-top" href="{{ path ('student_detail', {'id': student.id})}}"><img src="{{asset ('imageStudent/'~student.image)}}" width="100%" height="200"></a></center>
+            </td>
+            <div class="card-body">
+                <td>Name: {{student.name}}</td>
+                <br>
+                <td>Code: {{student.code}}</td>
+                <br>
+                <td>Gender: {{student.gender}}</td>
+                <br>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td class="card-link">
+                        <a href="{{ path ('student_edit', {'id': student.id})}}">
+                        <img src="{{asset('images/edit.jpeg')}}" width=35 height=30></a>
+                        <a href="{{ path ('student_delete', {'id': student.id})}}">
+                        <img src="{{asset('images/delete.jpeg')}}" width=35 height=40></a>
+                    </td>
+                {% endif %} 
+            </div>
+        </div>
     {% endfor %}
-
-    </table>
+    </div>
+    </div>
 {% endblock %}
