@@ -1,27 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset ('css/register.css')}}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+{% endblock %}
+{% block javascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
 {% block nav %}{% endblock %}
 {% block body %}
-<div class="container col-md-3">
-    <h1>Register</h1>
-
+<div class="signup-form">
     {{ form_start(registrationForm) }}
-        <div class="form-control">
-            <label for="">Username</label>
-            {{ form_widget(registrationForm.username) }}
+		<h2>Register</h2>
+        <div class="form-group">
+        	{{ form_widget(registrationForm.username, {
+                'attr': {'class': 'form-control', 'placeholder': 'Username'}
+            }) }}
         </div>
-        <div class="form-control">
-            <label for="">Password</label>
-            {{ form_widget(registrationForm.plainPassword) }}
-        </div>
-        <div class="text-center">
-            <label for="">Agree terms</label>
-            {{ form_widget(registrationForm.agreeTerms) }}
-        </div>
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary">Register</button>
+		<div class="form-group">
+            {{ form_widget(registrationForm.plainPassword, {
+                'attr': {'class': 'form-control', 'placeholder': 'Password'}
+            }) }}
+        </div>      
+        <div class="form-group">
+			<label class="checkbox-inline">
+                {{ form_widget(registrationForm.agreeTerms) }}
+                Agree terms
+            </label>
+		</div>
+		<div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
         </div>
     {{ form_end(registrationForm) }}
-</div>    
+	<div class="text-center">Already have an account? <a href="{{path ('app_login')}}">Login</a></div>
+</div>
+
 {% endblock %}
