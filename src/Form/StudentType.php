@@ -44,7 +44,7 @@ class StudentType extends AbstractType
         ->add('image', FileType::class,[
             'label' => 'Image',
             'data_class' => null,
-            'require' => is_null($builder->getData()->getImage())
+            'required' => is_null($builder->getData()->getImage())
         ])
         ->add('detail', StudentDetailType::class)
     ;    

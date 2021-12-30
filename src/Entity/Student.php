@@ -95,8 +95,9 @@ class Student
 
     public function setImage($image)
     {
+        if ($image != null){
         $this->image = $image;
-
+        }
         return $this;
     }
 
